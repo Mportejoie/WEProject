@@ -1,0 +1,132 @@
+<div class="factures-container">
+  <div class="zone" id="gauche">
+    <p-menu [model]="items"></p-menu>
+  </div>
+  <div class="zone" id="droite">
+    <p-tabMenu [model]="tabItems" [activeItem]="activeTab" (activeItemChange)="handleTabChange($event)"></p-tabMenu>
+    <div class="content" *ngIf="activeTab.label === 'Liste'">
+      <p-table [value]="documents">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>N° Facture</th>
+            <th>Date</th>
+            <th>Nom Client</th>
+            <th>Prix Total TTC</th>
+            <th>Status</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-document>
+          <tr>
+            <td>{{ document.invoiceNumber }}</td>
+            <td>{{ document.date }}</td>
+            <td>{{ document.clientName }}</td>
+            <td>{{ document.totalTTC | currency:'EUR' }}</td>
+            <td>{{ document.status }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="content stepper" *ngIf="activeTab.label === 'Créer'">
+      <div class="stepper-content">
+        <div *ngIf="stepIndex === 0">
+          <h3>Informations Clients</h3>
+          <div class="button-group">
+            <button pButton type="button" label="Chercher" icon="pi pi-search" (click)="showDialog()"></button>
+            <button pButton type="button" label="Sauvegarder" icon="pi pi-save"></button>
+            <button pButton type="button" label="Modifier" icon="pi pi-pencil"></button>
+          </div>
+          <div class="p-field p-float-label-container">
+            <div class="p-float-label">
+              <input id="clientFirstName" type="text" pInputText [(ngModel)]="clientFirstName" />
+              <label for="clientFirstName">Prénom</label>
+            </div>
+            <div class="p-float-label">
+              <input id="clientLastName" type="text" pInputText [(ngModel)]="clientLastName" />
+              <label for="clientLastName">Nom</label>
+            </div>
+            <div class="p-float-label">
+              <input id="clientAddress" type="text" pInputText [(ngModel)]="clientAddress" />
+              <label for="clientAddress">Adresse</label>
+            </div>
+            <div class="p-float-label">
+              <input id="clientPostalCode" type="text" pInputText [(ngModel)]="clientPostalCode" class="numeric-input" (input)="filterNumbers($event)" />
+              <label for="clientPostalCode">Code Postal</label>
+            </div>
+            <div class="p-float-label">
+              <input id="clientPhone" type="text" pInputText [(ngModel)]="clientPhone" class="numeric-input" (input)="filterNumbers($event)" />
+              <label for="clientPhone">Téléphone</label>
+            </div>
+            <div class="p-float-label">
+              <input id="clientEmail" type="text" pInputText [(ngModel)]="clientEmail" />
+              <label for="clientEmail">Email</label>
+            </div>
+            <div class="p-float-label" *ngIf="clientType === 'Particulier'">
+              <input id="clientGender" type="text" pInputText [(ngModel)]="clientGender" />
+              <label for="clientGender">Sexe</label>
+            </div>
+            <div class="p-float-label" *ngIf="clientType === 'Entreprise'">
+              <input id="clientSIRET" type="text" pInputText [(ngModel)]="clientSIRET" />
+              <label for="clientSIRET">SIRET</label>
+            </div>
+          </div>
+
+          <p-selectButton [options]="clientTypes" [(ngModel)]="clientType" class="p-mt-2 select-button"></p-selectButton>
+        </div>
+        <div *ngIf="stepIndex === 1">
+          <h3>Informations Forfait</h3>
+          <!-- Formulaire pour les informations forfait -->
+        </div>
+        <div *ngIf="stepIndex === 2">
+          <h3>Informations Légales</h3>
+          <!-- Formulaire pour les informations légales -->
+        </div>
+        <div *ngIf="stepIndex === 3">
+          <h3>Finalisation</h3>
+          <div class="button-group">
+            <button pButton type="button" label="Enregistrer en Brouillon" icon="pi pi-save" (click)="saveDraft()"></button>
+            <button pButton type="button" label="Envoyer" icon="pi pi-send" (click)="send()"></button>
+            <button pButton type="button" label="Valider" icon="pi pi-check" (click)="validate()"></button>
+            <button pButton type="button" label="Télécharger" icon="pi pi-download" (click)="download()"></button>
+          </div>
+          <!-- Prévisualisation du PDF en pleine page -->
+          <div class="preview-full">
+            <app-pdf-preview
+              [clientFirstName]="clientFirstName"
+              [clientLastName]="clientLastName"
+              [clientAddress]="clientAddress"
+              [clientPostalCode]="clientPostalCode"
+              [clientPhone]="clientPhone"
+              [clientEmail]="clientEmail">
+            </app-pdf-preview>
+          </div>
+        </div>
+        <div class="stepper-buttons" *ngIf="stepIndex !== 3">
+          <button pButton label="Précédent" (click)="prevStep()" [disabled]="stepIndex === 0"></button>
+          <button pButton label="Suivant" (click)="nextStep()" [disabled]="stepIndex === 3"></button>
+        </div>
+      </div>
+      <div class="input-section">
+        <div class="divider"></div> <!-- Ajout du diviseur ici -->
+        <div class="preview-section" *ngIf="stepIndex !== 3">
+          <h3>Prévisualisation du Document</h3>
+          <div class="preview-content">
+            <app-pdf-preview
+              [clientFirstName]="clientFirstName"
+              [clientLastName]="clientLastName"
+              [clientAddress]="clientAddress"
+              [clientPostalCode]="clientPostalCode"
+              [clientPhone]="clientPhone"
+              [clientEmail]="clientEmail">
+            </app-pdf-preview>
+          </div>
+        </div>
+        <!-- Pop-up de recherche de client vide pour l'instant -->
+        <p-dialog header="Chercher" [(visible)]="displayDialog" [modal]="true" [closable]="true">
+          <p-footer>
+            <button pButton label="Fermer" icon="pi pi-times" (click)="hideDialog()" class="ui-button-secondary"></button>
+          </p-footer>
+        </p-dialog>
+      </div>
+    </div>
+  </div>
+</div>

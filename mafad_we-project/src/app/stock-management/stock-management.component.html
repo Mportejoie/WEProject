@@ -1,0 +1,140 @@
+<p-toast></p-toast>
+
+<p-dialog header="Ajouter Catégorie" [(visible)]="displayAddCategory" [modal]="true" [closable]="false" [style]="{width: '50vw'}">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="categoryName">Nom de la catégorie</label>
+      <input id="categoryName" pInputText [(ngModel)]="newCategoryName">
+    </div>
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Annuler" icon="pi pi-times" (click)="displayAddCategory=false"></button>
+    <button pButton type="button" label="Ajouter" icon="pi pi-check" (click)="addCategory()"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Modifier Catégorie" [(visible)]="displayEditCategory" [modal]="true" [closable]="false" [style]="{width: '50vw'}">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="editCategoryName">Nom de la catégorie</label>
+      <input id="editCategoryName" pInputText [(ngModel)]="editCategoryName">
+    </div>
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Annuler" icon="pi pi-times" (click)="displayEditCategory=false"></button>
+    <button pButton type="button" label="Enregistrer" icon="pi pi-check" (click)="updateCategory()"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Ajouter Élément" [(visible)]="displayAddElement" [modal]="true" [closable]="false" [style]="{width: '50vw'}">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="elementName">Nom de l'élément</label>
+      <input id="elementName" pInputText [(ngModel)]="newElement.name">
+    </div>
+    <div class="p-field">
+      <label for="elementMarque">Marque</label>
+      <input id="elementMarque" pInputText [(ngModel)]="newElement.marque">
+    </div>
+    <div class="p-field">
+      <label for="elementModele">Modèle</label>
+      <input id="elementModele" pInputText [(ngModel)]="newElement.modele">
+    </div>
+    <div class="p-field">
+      <label for="elementFormat">Format</label>
+      <input id="elementFormat" pInputText [(ngModel)]="newElement.format">
+    </div>
+    <div class="p-field">
+      <label for="elementQuantity">Quantité</label>
+      <input id="elementQuantity" pInputText type="number" [(ngModel)]="newElement.quantity">
+    </div>
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Annuler" icon="pi pi-times" (click)="displayAddElement=false"></button>
+    <button pButton type="button" label="Ajouter" icon="pi pi-check" (click)="addElement()"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Modifier Élément" [(visible)]="displayEditElement" [modal]="true" [closable]="false" [style]="{width: '50vw'}">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="editElementName">Nom de l'élément</label>
+      <input id="editElementName" pInputText [(ngModel)]="editElement.name">
+    </div>
+  <div class="p-field">
+    <label for="elementMarque">Marque</label>
+    <input id="editElementMarque" pInputText [(ngModel)]="editElement.marque">
+  </div>
+  <div class="p-field">
+    <label for="editElementModele">Modèle</label>
+    <input id="editElementModele" pInputText [(ngModel)]="editElement.modele">
+  </div>
+    <div class="p-field">
+      <label for="editElementFormat">Format</label>
+      <input id="editElementFormat" pInputText [(ngModel)]="editElement.format">
+    </div>
+    <div class="p-field">
+      <label for="editElementQuantity">Quantité</label>
+      <input id="editElementQuantity" pInputText type="number" [(ngModel)]="editElement.quantity">
+    </div>
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Annuler" icon="pi pi-times" (click)="displayEditElement=false"></button>
+    <button pButton type="button" label="Enregistrer" icon="pi pi-check" (click)="updateElement()"></button>
+  </p-footer>
+</p-dialog>
+
+<div class="container">
+  <div class="p-grid">
+    <div class="p-col-3">
+      <div class="p-mt-2">
+        <button pButton type="button" label="Créer Catégorie" icon="pi pi-plus" class="btn-ajouter" (click)="showAddCategoryDialog()"></button>
+        <button pButton type="button" label="Modifier Catégorie" icon="pi pi-pencil" class="btn-modify" (click)="showEditCategoryDialog()"></button>
+        <button pButton type="button" label="Supprimer Catégorie" icon="pi pi-trash" class="btn-delete" (click)="deleteCategory()"></button>
+      </div>
+      <p-tree [value]="categories" selectionMode="single" (onNodeSelect)="onCategorySelect($event)">
+        <ng-template let-node pTemplate="default">
+          <span>{{node.label}}</span>
+        </ng-template>
+      </p-tree>
+    </div>
+    <div class="p-col-9">
+      <div class="p-mt-2">
+        <button pButton type="button" label="Ajouter Élément" icon="pi pi-plus" class="btn-ajouter" (click)="showAddElementDialog()"></button>
+        <button pButton type="button" label="Modifier Élément" icon="pi pi-pencil" class="btn-modify" (click)="showEditElementDialog()"></button>
+        <button pButton type="button" label="Supprimer Élément" icon="pi pi-trash" class="btn-delete" (click)="deleteElement()"></button>
+      </div>
+      <div class="p-inputgroup p-mb-3">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-search"></i>
+        </span>
+        <input type="text" pInputText placeholder="Rechercher un élément" (input)="filterItems($event)">
+      </div>
+      <p-table [value]="filteredItems">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nom</th>
+            <th>Marque</th>
+            <th>Modèle</th>
+            <th>Format</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template let-item pTemplate="body">
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.marque}}</td>
+            <td>{{item.modele}}</td>
+            <td>{{item.format}}</td>
+            <td>{{item.quantity}}</td>
+            <td>
+              <button pButton type="button" icon="pi pi-plus" (click)="incrementQuantity(item)"></button>
+              <button pButton type="button" icon="pi pi-minus" (click)="decrementQuantity(item)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  angular-app:
+    build: .
+    ports:
+      - "4200:4200"
+    depends_on:
+      - postgres
+      - backend
+    environment:
+      DB_NAME: MAFAD
+      DB_USER: postgres
+      DB_PASSWORD: root
+      DB_HOST : postgres
+      DB_PORT: 5432
+    #command: ["./wait-for-it.sh", "172.18.0.2:5432", "--", "serve","-s", "dist"]
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3000:3000"
+    environment:
+      DB_NAME: MAFAD
+      DB_USER: postgres
+      DB_PASSWORD: root
+      DB_HOST: postgres
+      DB_PORT: 5432
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB : MAFAD
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./backup_all.sql:/docker-entrypoint-initdb.d/backup_all.sql
+
+  #wait-for-postgres:
+  #  image: appropriate/curl
+  #  command: ["sh", "-c", "curl -sSf http://postgres:5432 > /dev/null && echo 'PostgreSQL is ready'"]
+  #  depends_on:
+  #    - postgres

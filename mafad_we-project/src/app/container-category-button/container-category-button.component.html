@@ -1,0 +1,4 @@
+<p>container-category-button works!</p>
+<div *ngFor="let button of buttons">
+  <app-category-button [label]="button.label" (action)="button.action()"></app-category-button>
+</div>

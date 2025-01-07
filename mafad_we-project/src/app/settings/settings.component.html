@@ -1,0 +1,60 @@
+<div class="settings-container">
+  <h1>Paramètres</h1>
+
+  <!-- Apparence -->
+  <div class="settings-section">
+    <h2>Apparence</h2>
+    <div class="p-field">
+      <label for="background">Choisir le fond de page</label>
+      <select id="background" [(ngModel)]="selectedBackground">
+        <option *ngFor="let image of backgroundImages" [value]="image.value">{{ image.name }}</option>
+      </select>
+    </div>
+    <div class="p-field">
+      <label for="color">Couleur des éléments</label>
+      <input id="color" type="color" [(ngModel)]="selectedColor" />
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="settings-section">
+    <h2>Notifications</h2>
+    <div class="p-field-checkbox">
+      <p-checkbox [(ngModel)]="notificationsEnabled" label="Activer les notifications"></p-checkbox>
+    </div>
+  </div>
+
+  <!-- Langue -->
+  <div class="settings-section">
+    <h2>Langue</h2>
+    <div class="p-field">
+      <label for="language">Choisir la langue</label>
+      <select id="language" [(ngModel)]="selectedLanguage">
+        <option *ngFor="let language of languages" [value]="language.value">{{ language.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Sécurité -->
+  <div class="settings-section">
+    <h2>Sécurité</h2>
+    <div class="p-field-checkbox">
+      <p-checkbox [(ngModel)]="twoFactorAuthEnabled" label="Activer l'authentification à deux facteurs"></p-checkbox>
+    </div>
+  </div>
+
+  <!-- Confidentialité -->
+  <div class="settings-section">
+    <h2>Confidentialité</h2>
+    <div class="p-field-checkbox">
+      <p-checkbox [(ngModel)]="trackingEnabled" label="Activer le suivi"></p-checkbox>
+    </div>
+  </div>
+
+  <!-- Gestion des Données -->
+  <div class="settings-section">
+    <h2>Gestion des Données</h2>
+    <button pButton type="button" label="Exporter les données" (click)="exportData()"></button>
+    <button pButton type="button" label="Supprimer les données" (click)="deleteData()"></button>
+  </div>
+</div>

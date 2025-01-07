@@ -1,0 +1,40 @@
+<div class="login-container">
+  <div class="login-left">
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="username">Nom d'utilisateur</label>
+          <input id="username" type="text" pInputText [(ngModel)]="username" name="username" required />
+        </div>
+        <div class="p-field">
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" pInputText [(ngModel)]="password" name="password" required />
+        </div>
+      </div>
+      <button pButton type="submit" label="Se connecter" icon="pi pi-user" class="login-button"></button>
+    </form>
+  </div>
+  <div class="login-divider">
+    <p-divider layout="vertical"><b>OU</b></p-divider>
+  </div>
+  <div class="login-right">
+    <button pButton type="button" label="S'inscrire" icon="pi pi-user-plus" severity="success" class="register-button" (click)="showRegister()"></button>
+  </div>
+</div>
+
+<!-- Dialog pour l'inscription -->
+<p-dialog header="Inscription" [(visible)]="displayRegisterDialog" [modal]="true" [closable]="true">
+  <form (ngSubmit)="onRegister()">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="newUsername">Nom d'utilisateur</label>
+        <input id="newUsername" type="text" pInputText [(ngModel)]="newUsername" name="newUsername" required />
+      </div>
+      <div class="p-field">
+        <label for="newPassword">Mot de passe</label>
+        <input id="newPassword" type="password" pInputText [(ngModel)]="newPassword" name="newPassword" required />
+      </div>
+    </div>
+    <button pButton type="submit" label="S'inscrire"></button>
+  </form>
+</p-dialog>

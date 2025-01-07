@@ -1,0 +1,65 @@
+.container {
+  margin-top : 3vh;
+  display: flex;
+  height: 90vh;
+}
+
+.panel {
+  border: 1px solid #00e1ff;
+  border-radius: 7px; /* Facultatif, pour des coins arrondis */
+  margin-right:1vw;
+}
+.sub_panel {
+  border: 1px solid #0095ff;
+  border-radius: 7px; /* Facultatif, pour des coins arrondis */
+  padding: 10px; /* Facultatif, pour un peu de rembourrage */
+}
+
+#left-panel {
+  margin-left : 5vw;
+  width: 30vw;
+  height: 50vh;
+  background-color: #ffffff;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#middle-panel {
+  width: 25vw;
+  height: 50vh;
+  background-color: #ffffff;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#right-panel {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  height: 70vh;
+}
+
+#top-panel {
+  margin-left : 0vw;
+  height: 40vh;
+  width: 30vw;
+  background-color: #ffffff;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#bottom-panel {
+  margin-top : 3vh;
+  height: 20vh;
+  width: 30vw;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.knob-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}

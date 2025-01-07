@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="panel" id="left-panel">
+    <p-chart type="bar" [data]="basicData"></p-chart>
+  </div>
+  <div class="panel" id="middle-panel">
+    <!-- Future component for the top-right section -->
+    <p>Future component here</p>
+  </div>
+  <div class="panel" id="right-panel">
+      <div class="sub_panel" id="top-panel">
+        <!-- Future component for the top-right section -->
+        <p>Future component here</p>
+      </div>
+      <div class="sub_panel" id="bottom-panel">
+        <div class="knob-container">
+          <p-knob [(ngModel)]="value1"></p-knob>
+          <p-knob [(ngModel)]="value2"></p-knob>
+          <p-knob [(ngModel)]="value3"></p-knob>
+        </div>
+      </div>
+  </div>
+</div>

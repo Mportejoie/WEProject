@@ -1,0 +1,167 @@
+<p-dialog header="Ajouter Client" [(visible)]="display" [modal]="true" [closable]="false" [style]="{width: '50vw'}">
+  <div class="p-fluid">
+    <div class="p-field" [ngClass]="{'field-error': errorMessages.firstName}">
+      <label for="firstName">Prénom</label>
+      <input id="firstName" pInputText [(ngModel)]="newClient.firstName" (keypress)="validateAlpha($event)">
+      <small *ngIf="errorMessages.firstName" class="p-error">{{ errorMessages.firstName }}</small>
+    </div>
+    <div class="p-field" [ngClass]="{'field-error': errorMessages.lastName}">
+      <label for="lastName">Nom</label>
+      <input id="lastName" pInputText [(ngModel)]="newClient.lastName" (keypress)="validateAlpha($event)">
+      <small *ngIf="errorMessages.lastName" class="p-error">{{ errorMessages.lastName }}</small>
+    </div>
+    <div class="p-field">
+    <label for="gender">Sexe (optionnel)</label>
+    <input id="gender" pInputText [(ngModel)]="newClient.gender">
+  </div>
+    <div class="p-field" [ngClass]="{'field-error': errorMessages.address}">
+      <label for="address">Adresse</label>
+      <input id="address" pInputText [(ngModel)]="newClient.address">
+      <small *ngIf="errorMessages.address" class="p-error">{{ errorMessages.address }}</small>
+    </div>
+    <div class="p-field" [ngClass]="{'field-error': errorMessages.phone}">
+      <label for="phone">Téléphone</label>
+      <input id="phone" pInputText [(ngModel)]="newClient.phoneNumber" (keypress)="validateNumeric($event)">
+      <small *ngIf="errorMessages.phone" class="p-error">{{ errorMessages.phone }}</small>
+    </div>
+    <div class="p-field" [ngClass]="{'field-error': errorMessages.email}">
+      <label for="email">Email</label>
+      <input id="email" pInputText [(ngModel)]="newClient.email" (keypress)="validateEmail($event)">
+      <small *ngIf="errorMessages.email" class="p-error">{{ errorMessages.email }}</small>
+    </div>
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Annuler" icon="pi pi-times" (click)="display=false"></button>
+    <button pButton type="button" label="Ajouter" icon="pi pi-check" (click)="addClient(newClient);display=false"></button>
+  </p-footer>
+</p-dialog>
+
+
+<!-- Formulaire de Modification Client -->
+<p-dialog header="Modifier Client" [(visible)]="displayEdit" [modal]="true" [closable]="false" [style]="{width: '50vw'}">
+  <div class="p-fluid">
+    <div class="p-field" [ngClass]="{'field-error': errorMessagesEdit.firstName}">
+      <label for="firstNameEdit">Prénom</label>
+      <input id="firstNameEdit" pInputText [(ngModel)]="editClient.firstName" (keypress)="validateAlpha($event)">
+      <small *ngIf="errorMessagesEdit.firstName" class="p-error">{{ errorMessagesEdit.firstName }}</small>
+    </div>
+    <div class="p-field" [ngClass]="{'field-error': errorMessagesEdit.lastName}">
+      <label for="lastNameEdit">Nom</label>
+      <input id="lastNameEdit" pInputText [(ngModel)]="editClient.lastName" (keypress)="validateAlpha($event)">
+      <small *ngIf="errorMessagesEdit.lastName" class="p-error">{{ errorMessagesEdit.lastName }}</small>
+    </div>
+    <div class="p-field">
+      <label for="genderEdit">Sexe (optionnel)</label>
+      <input id="genderEdit" pInputText [(ngModel)]="editClient.gender">
+    </div>
+    <div class="p-field" [ngClass]="{'field-error': errorMessagesEdit.address}">
+      <label for="addressEdit">Adresse</label>
+      <input id="addressEdit" pInputText [(ngModel)]="editClient.address">
+      <small *ngIf="errorMessagesEdit.address" class="p-error">{{ errorMessagesEdit.address }}</small>
+    </div>
+    <div class="p-field" [ngClass]="{'field-error': errorMessagesEdit.phone}">
+      <label for="phoneEdit">Téléphone</label>
+      <input id="phoneEdit" pInputText [(ngModel)]="editClient.phoneNumber" (keypress)="validateNumeric($event)">
+      <small *ngIf="errorMessagesEdit.phone" class="p-error">{{ errorMessagesEdit.phone }}</small>
+    </div>
+    <div class="p-field" [ngClass]="{'field-error': errorMessagesEdit.email}">
+      <label for="emailEdit">Email</label>
+      <input id="emailEdit" pInputText [(ngModel)]="editClient.email" (keypress)="validateEmail($event)">
+      <small *ngIf="errorMessagesEdit.email" class="p-error">{{ errorMessagesEdit.email }}</small>
+    </div>
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Annuler" icon="pi pi-times" (click)="displayEdit=false"></button>
+    <button pButton type="button" label="Enregistrer" icon="pi pi-check" (click)="updateClient()"></button>
+  </p-footer>
+</p-dialog>
+
+<p-toast></p-toast>
+
+
+<p-dialog header="Modifier Client" [(visible)]="displayEdit" [modal]="true" [closable]="false" [style]="{width: '50vw'}">
+  <div class="p-fluid">
+    <!-- Formulaire de modification de client -->
+    <div class="p-field" [ngClass]="{'field-error': errorMessagesEdit.firstName}">
+      <label for="firstNameEdit">Prénom</label>
+      <input id="firstNameEdit" pInputText [(ngModel)]="editClient.firstName" (keypress)="validateAlpha($event)">
+      <small *ngIf="errorMessagesEdit.firstName" class="p-error">{{ errorMessagesEdit.firstName }}</small>
+    </div>
+    <!-- Autres champs du formulaire -->
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Annuler" icon="pi pi-times" (click)="displayEdit=false"></button>
+    <button pButton type="button" label="Enregistrer" icon="pi pi-check" (click)="updateClient()"></button>
+  </p-footer>
+</p-dialog>
+
+<p-toast></p-toast>
+
+<div class="clients-container">
+  <div class="zone" id="gauche">
+    <h2>Gestion Client</h2>
+
+    <button pButton type="button" label="Ajouter client" class="btn-ajouter" (click)="showDialog()"></button>
+    <button pButton type="button" label="Supprimer client" class="btn-delete" (click)="deleteClient()"></button>
+    <button pButton type="button" label="Modifier client" class="btn-modify" (click)="showEditDialog()"></button>
+
+    <h3>Informations des Clients</h3>
+    <p-table #dt [value]="clients" selectionMode="single" [(selection)]="selectedClient" (onRowSelect)="onRowSelect($event)" [scrollable]="true" scrollHeight="50vh">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="firstName">Prénom <p-sortIcon field="firstName"></p-sortIcon></th>
+          <th pSortableColumn="lastName">Nom <p-sortIcon field="lastName"></p-sortIcon></th>
+          <th pColumn="address">Adresse </th>
+          <th pColumn="phone">Téléphone </th>
+        </tr>
+        <tr>
+          <th><input pInputText type="text" (input)="filterGlobal($event, 'firstName', 'contains')" placeholder="Filtrer par prénom"></th>
+          <th><input pInputText type="text" (input)="filterGlobal($event, 'lastName', 'contains')" placeholder="Filtrer par nom"></th>
+          <th><input pInputText type="text" (input)="filterGlobal($event, 'address', 'contains')" placeholder="Filtrer par adresse"></th>
+          <th><input pInputText type="text" (input)="filterGlobal($event, 'phone', 'contains')" placeholder="Filtrer par téléphone"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-client>
+        <tr [pSelectableRow]="client">
+          <td>{{client.firstName}}</td>
+          <td>{{client.lastName}}</td>
+          <td>{{client.address}}</td>
+          <td>{{client.phoneNumber}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="zone" id="droite">
+    <p-card *ngIf="selectedClient">
+      <ng-template pTemplate="title">
+        Détails du Client
+      </ng-template>
+      <ng-template pTemplate="content">
+        <p><strong>Nom :</strong> {{selectedClient.lastName}}</p>
+        <p><strong>Prenom :</strong> {{selectedClient.firstName}}</p>
+        <p><strong>Adresse :</strong> {{selectedClient.address}}</p>
+        <p><strong>Ville :</strong> {{selectedClient.city}}</p>
+        <p><strong>Téléphone :</strong> {{selectedClient.phoneNumber}}</p>
+        <p><strong>Email :</strong> {{selectedClient.email}}</p>
+        <p><strong>Date de la Dernière Facture :</strong> {{selectedClient.lastInvoiceDate}}</p>
+        <!-- Tableau des factures du client -->
+        <p-table [value]="selectedClient.invoices" [scrollable]="true" scrollHeight="200px">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Date de Facture</th>
+              <th>Montant Facture</th>
+              <th>Date de Paiement</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-invoice>
+            <tr>
+              <td>{{invoice.date | date:'yyyy-MM-dd'}}</td>
+              <td>{{invoice.amount | currency:'EUR'}}</td>
+              <td>{{invoice.paymentDate | date:'yyyy-MM-dd'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

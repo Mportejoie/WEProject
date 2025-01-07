@@ -1,0 +1,124 @@
+.factures-container {
+  display: grid;
+  grid-template-areas:
+    "gauche droite";
+  grid-template-columns: 15vw 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2vh; /* Espace entre les zones */
+  height: 80vh;
+  max-height: 80vh;
+  width: 90vw;
+  max-width: 90vw;
+  margin-left: 10vh;
+  padding: 2vh;
+}
+
+.zone {
+  border: 1px solid #ccc; /* Contour de chaque zone */
+  border-radius: 10px; /* Coins légèrement arrondis */
+  padding: 10px;
+  background-color: rgba(243, 251, 247, 0.53); /* Couleur de fond léger */
+  height: 70vh; /* Hauteur fixe des panneaux */
+}
+
+#droite .p-tabmenu-nav {
+  margin-bottom: 2vh;
+}
+
+.p-tabmenu-nav .p-tabmenuitem {
+  transition: background-color 0.3s ease;
+}
+
+.p-tabmenu-nav .p-tabmenuitem a:hover {
+  background-color: rgba(0, 123, 255, 0.1); /* Teinte légère bleu pâle */
+}
+
+.p-tabmenu-nav .p-tabmenuitem.p-highlight a {
+  background-color: rgba(0, 123, 255, 0.2); /* Couleur pour l'élément sélectionné */
+}
+
+.content {
+  overflow: auto;
+  padding: 1rem;
+}
+
+.stepper {
+  background-color: white; /* Fond blanc pour le stepper */
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+}
+
+.stepper-content {
+  flex: 1;
+}
+
+.input-section {
+  flex: 1;
+}
+
+.stepper-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.p-field.p-float-label-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* Espace entre les éléments */
+}
+
+.button-group button {
+  margin-right: 10px; /* Ajoute de l'espace entre les boutons */
+  margin-bottom: 4vh; /* Ajoute de la marge entre les inputs */
+}
+
+.p-field.p-float-label-container .p-float-label {
+  margin-bottom: 2vh; /* Ajoute de la marge entre les inputs */
+  flex: 1 1 48%; /* Ajuste la largeur des labels */
+}
+
+.select-button {
+  margin-top: 2vh; /* Ajoute de la marge entre les inputs et le select button */
+}
+
+.p-field.p-float-label-container .p-float-label input {
+  width: calc(100% - 2vw); /* Appliquer la taille à tous les inputs */
+  padding-right: 2vw; /* Ajustement de la marge intérieure */
+}
+
+.numeric-input {
+  ime-mode: disabled; /* Désactiver l'IME pour forcer l'entrée numérique sur certains navigateurs */
+}
+
+
+.divider {
+  width: 2px;
+  /*background-color: #00e1ff; /* Couleur du divider */
+  margin: 0 1rem;
+}
+
+.preview-section {
+  /*flex: 1;*/
+  padding: 1rem;
+ /* background-color: rgba(243, 251, 247, 0.53); /* Couleur de fond léger */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  height: 70vh; /* Hauteur fixe de la prévisualisation */
+  margin-left: 2vw;
+  overflow: hidden;
+}
+
+.preview-full {
+  height: 70vh; /* Hauteur fixe de la prévisualisation pleine page */
+  padding: 1rem;
+  background-color: rgba(243, 251, 247, 0.53); /* Couleur de fond léger */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 2vh;
+  overflow: auto;
+}
+.full-width {
+  width: 100%;
+}

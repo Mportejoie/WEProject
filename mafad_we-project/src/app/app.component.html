@@ -1,0 +1,56 @@
+<div class="header">
+  <div class="header-title">
+    <h1>{{ title }}</h1>
+  </div>
+  <div class="header-actions">
+    <ng-container *ngIf="username; else loginButton">
+      <span class="user-info">
+        <i class="pi pi-user" style="margin-right: 0.5rem;"></i>
+        {{ username }}
+      </span>
+      <button pButton type="button" label="Déconnexion" icon="pi pi-sign-out" (click)="logout()"></button>
+    </ng-container>
+    <ng-template #loginButton>
+      <button pButton type="button" label="Connexion" icon="pi pi-user" (click)="showLoginDialog()"></button>
+    </ng-template>
+  </div>
+</div>
+
+<!-- P DOCK -->
+<p-dock [model]="dockItems"></p-dock>
+
+<div *ngIf="currentPage === 'home'">
+  <app-home></app-home>
+</div>
+<div *ngIf="currentPage === 'settings'">
+  <app-settings></app-settings>
+</div>
+<div *ngIf="currentPage === 'clients'">
+  <app-clients></app-clients>
+</div>
+<div *ngIf="currentPage === 'stocks'">
+  <app-stocks></app-stocks>
+</div>
+<div *ngIf="currentPage === 'invoices'">
+  <app-invoices></app-invoices>
+</div>
+<div *ngIf="currentPage === 'accounting'">
+  <app-accounting></app-accounting>
+</div>
+
+<!-- Dialog pour la Connexion -->
+<p-dialog header="Connexion" [(visible)]="displayLoginDialog" [modal]="true" [closable]="true">
+  <app-login (loginSuccess)="onLoginSuccess()"></app-login>
+</p-dialog>
+
+
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+

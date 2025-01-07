@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+  height: 5vh;
+  margin-left: 10vw;
+  padding: 1vh 2vh;
+  background-color: #0057a1; /* Couleur de fond du bandeau */
+  color: #fff; /* Couleur du texte du bandeau */
+  border-radius: 1vh;
+}
+.header-title h1 {
+  margin: 0;
+  font-size: 1.9vh;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}

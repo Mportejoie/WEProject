@@ -1,0 +1,50 @@
+.container {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+.p-grid {
+  margin: 20px 0;
+}
+
+.p-col-3, .p-col-9 {
+  padding: 10px;
+}
+
+
+/* Styles pour le bouton Ajouter */
+.btn-ajouter {
+  color: white;
+  border: none; /* Facultatif, pour un look plus propre */
+  border-radius: 5px; /* Facultatif, pour des coins arrondis */
+  padding: 10px; /* Facultatif, pour un peu de rembourrage */
+  margin-right:1vw;
+}
+
+/* Styles pour le bouton Supprimer */
+.btn-delete {
+  background-color: red;
+  color: white;
+  border: none; /* Facultatif, pour un look plus propre */
+  border-radius: 5px; /* Facultatif, pour des coins arrondis */
+  padding: 10px; /* Facultatif, pour un peu de rembourrage */
+  margin-right:1vw;
+}
+
+/* Styles pour le bouton Modifier */
+.btn-modify {
+  background-color: green;
+  color: white;
+  border: none; /* Facultatif, pour un look plus propre */
+  border-radius: 5px; /* Facultatif, pour des coins arrondis */
+  padding: 10px; /* Facultatif, pour un peu de rembourrage */
+  margin-right:1vw;
+}
+
+.field-error input {
+  border-color: red;
+}
+
+.p-error {
+  color: red;
+}
